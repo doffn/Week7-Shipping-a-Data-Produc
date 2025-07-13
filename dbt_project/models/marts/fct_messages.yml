@@ -1,0 +1,43 @@
+# dbt_project/models/marts/fct_messages.yml
+version: 2
+
+models:
+  - name: fct_messages
+    description: "Fact table containing detailed information about each Telegram message."
+    columns:
+      - name: message_id
+        description: "The unique identifier for the message."
+        tests:
+          - unique
+          - not_null
+      - name: channel_id
+        description: "The ID of the Telegram channel the message belongs to."
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_channels')
+              field: channel_id
+      - name: message_timestamp
+        description: "Timestamp when the message was posted (UTC)."
+        tests:
+          - not_null
+      - name: message_length
+        description: "Length of the message text."
+      - name: has_image
+        description: "Boolean indicating if the message contains an image."
+    tests:
+      - name: messages_with_text_and_no_media
+        description: "Ensure messages with text content do not falsely report no media."
+        tags: ["custom"]
+        warn_if: ">0"
+        # This custom test checks for messages that have text but no media,
+        # which might indicate an issue if all messages are expected to have media.
+        # Adjust the logic based on your specific business rule.
+        # For example, if a message has text, it should not have media if it's a text-only channel.
+        # This is a placeholder; define a meaningful business rule.
+        # Example: All messages with 'product' in text must have an image.
+        # SELECT message_id FROM {{ this }} WHERE message_text ILIKE '%product%' AND NOT has_image
+        # For now, a simple example:
+        where: "message_text IS NOT NULL AND has_media = FALSE"
+        # The actual SQL for the custom test is defined in a separate .sql file in the tests/ directory
+        # For example, tests/messages_with_text_and_no_media.sql

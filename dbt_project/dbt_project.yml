@@ -1,0 +1,26 @@
+name: 'telegram_data_warehouse'
+version: '1.0.0'
+config-version: 2
+
+profile: 'telegram_data_warehouse' # This should match a profile in your profiles.yml
+
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+target-path: "target"
+clean-targets:
+  - "target"
+  - "dbt_packages"
+  - "logs"
+
+models:
+  telegram_data_warehouse:
+    # Apply a common materialization to all models in this project
+    +materialized: view # or 'table' for production
+    +schema: marts # Default schema for mart models
+    staging:
+      +schema: staging # Schema for staging models

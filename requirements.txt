@@ -1,0 +1,11 @@
+telethon==1.32.0
+psycopg2-binary==2.9.9
+dbt-postgres==1.7.0 # Or the latest compatible version
+ultralytics==8.0.0 # Or the latest compatible version
+fastapi==0.111.0
+uvicorn==0.30.1
+python-dotenv==1.0.1
+pydantic==2.7.4
+dagster==1.7.10
+dagster-webserver==1.7.10
+dvc

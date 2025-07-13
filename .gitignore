@@ -1,0 +1,4 @@
+.env.example
+venv/
+fastapi_app/
+*.session
