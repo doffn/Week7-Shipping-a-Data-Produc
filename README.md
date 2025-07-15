@@ -21,16 +21,16 @@ This project builds an end-to-end data pipeline to extract, transform, and analy
 
 The pipeline follows an ELT approach with an intermediate MongoDB layer:
 
-```mermaid title="Simplified Data Pipeline" type="diagram"
+```mermaid title="Simplified Data Pipeline"
 graph TD;
     A[Telegram Channels] --> B{Scraping Script};
     B --> C[Raw Data Lake (JSON)];
     C --> D{Load to MongoDB};
     D --> E[MongoDB];
     E --> F{Load to PostgreSQL};
-    F --> G[PostgreSQL (Raw)];
+    F --> G[PostgreSQL Raw];
     G --> H{dbt Transform};
-    H --> I[PostgreSQL (Marts)];
+    H --> I[PostgreSQL Marts];
     C -- Images --> J{YOLO Enrichment};
     J --> I;
     I --> K[FastAPI API];
@@ -54,9 +54,15 @@ graph TD;
 *   Git
 
 ### Steps
-1.  **Clone Repo:** `git clone <your-repo-url> && cd <your-repo-name>`
+1.  **Clone Repo:** ```bash
+    git clone <your-repo-url>
+    cd <your-repo-name>
+    ```
 2.  **Configure `.env`:** Copy `.env.example` to `.env` and fill in Telegram, PostgreSQL, and MongoDB credentials.
-3.  **Build & Start Containers:** `docker-compose build && docker-compose up -d`
+3.  **Build & Start Containers:** ```bash
+    docker-compose build
+    docker-compose up -d
+    ```
 4.  **Configure dbt Profiles:** Create/update `~/.dbt/profiles.yml` with the `telegram_data_warehouse` profile (refer to the full `README` or `dbt_project/profiles.yml` for details).
 
 ## 5. Code Structure (Brief)
@@ -80,7 +86,9 @@ graph TD;
 
 ## 6. Running the Pipeline
 
-Access the `app` container: `docker-compose exec app bash`
+Access the `app` container: ```bash
+docker-compose exec app bash
+```
 
 Inside the container (`/app`):
 
@@ -114,7 +122,7 @@ Inside the container (`/app`):
 
 ## 7. Data Model (Star Schema)
 
-```mermaid title="Dimensional Star Schema" type="diagram"
+```mermaid title="Dimensional Star Schema"
 graph TD;
     subgraph "Fact Tables"
         FCT_MESSAGES["fct_messages (Fact)"]
