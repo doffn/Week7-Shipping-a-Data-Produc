@@ -25,13 +25,13 @@ The pipeline follows an ELT approach with an intermediate MongoDB layer:
 ```mermaid title="📊 Data Pipeline Flow " type="diagram"
 graph TD
     A[Telegram Channels] --> B{Scraping Script}
-    B --> C[Raw Data Lake (JSON)]
-    C --> D{Load to MongoDB}
+    B --> C[Raw Data Lake, JSON]
+    C --> D{Load to postgre}
     D --> E[MongoDB]
     E --> F{Load to PostgreSQL}
     F --> G[PostgreSQL (Raw)]
     G --> H{dbt Transform}
-    H --> I[PostgreSQL (Marts)]
+    H --> I[PostgreSQL, Marts]
     C -- Images --> J{YOLO Enrichment}
     J --> I
     I --> K[FastAPI API]
