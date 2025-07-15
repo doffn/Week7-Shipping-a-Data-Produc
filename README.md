@@ -23,18 +23,19 @@ The pipeline follows an ELT approach with an intermediate MongoDB layer:
 
 ```mermaid title="Simplified Data Pipeline" type="diagram"
 graph TD;
-    A[Telegram Channels] --> B{Scraping Script};
-    B --> C[Raw Data Lake (JSON)];
-    C --> D{Load to MongoDB};
-    D --> E[MongoDB];
-    E --> F{Load to PostgreSQL};
-    F --> G[PostgreSQL (Raw)];
-    G --> H{dbt Transform};
-    H --> I[PostgreSQL (Marts)];
-    C -- Images --> J{YOLO Enrichment};
-    J --> I;
-    I --> K[FastAPI API];
-    K --> L[Business Users];
+    A[Telegram Channels] --> B{Scraping Script}
+    B --> C[Raw Data Lake (JSON)]
+    C --> D{Load to MongoDB}
+    D --> E[MongoDB]
+    E --> F{Load to PostgreSQL}
+    F --> G[PostgreSQL (Raw)]
+    G --> H{dbt Transform}
+    H --> I[PostgreSQL (Marts)]
+    C -- Images --> J{YOLO Enrichment}
+    J --> I
+    I --> K[FastAPI API]
+    K --> L[Business Users]
+
 ```
 
 ## 3. Technologies Used
