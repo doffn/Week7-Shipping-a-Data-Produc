@@ -21,23 +21,22 @@ This project builds an end-to-end data pipeline to extract, transform, and analy
 
 The pipeline follows an ELT approach with an intermediate MongoDB layer:
 
-<details> <summary><strong>📊 View Data Pipeline Diagram</strong></summary>
-mermaid
 
-graph TD;
+```mermaid title="📊 Data Pipeline Flow " type="diagram"
+graph TD
     A[Telegram Channels] --> B{Scraping Script}
     B --> C[Raw Data Lake (JSON)]
     C --> D{Load to MongoDB}
     D --> E[MongoDB]
     E --> F{Load to PostgreSQL}
-    F --> G[PostgreSQL (Raw)}
+    F --> G[PostgreSQL (Raw)]
     G --> H{dbt Transform}
     H --> I[PostgreSQL (Marts)]
     C -- Images --> J{YOLO Enrichment}
     J --> I
     I --> K[FastAPI API]
     K --> L[Business Users]
-</details>
+```
 
 ## 3. Technologies Used
 
