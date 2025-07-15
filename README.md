@@ -29,7 +29,7 @@ graph TD
     C --> D{Load to postgre}
     D --> E[MongoDB]
     E --> F{Load to PostgreSQL}
-    F --> G[PostgreSQL (Raw)]
+    F --> G[PostgreSQL, Raw]
     G --> H{dbt Transform}
     H --> I[PostgreSQL, Marts]
     C -- Images --> J{YOLO Enrichment}
